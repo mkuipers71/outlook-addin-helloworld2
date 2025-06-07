@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HelloWorld Task Pane</title>
+    
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    
+    <!-- Add-in CSS -->
+    <link rel="stylesheet" type="text/css" href="taskpane.css" />
+</head>
+<body>
+    <div class="ms-welcome">
+        <img width="90" height="90" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4wIVEQ0U8zF5ygAABNVJREFUeNrt3M1yFDcQB/Cfmd3dsZOQOCdPgKpnT/7Yk6dIS15A8AaBKjhxcmBJysmd2Z19Ox3pIykw2NmdGel/Kra8391/jaaVumU0TSv5C+tLXtK2I+ml8lWuLgGLdgKAP/mJAHgCgB+VrwsAvA3AKPtRAOAnAKAAOLJ9e5o82Q+uAOCdQvwZAH4DAMQnOuiVxNE0Tdvl/8J+KH4OABQAPS9+DgBQND29eBYAEAQKgKNp2i4AEG1/N037/nKb53k==" alt="logo" />
+        <h1 class="ms-font-xxl ms-fontWeight-light ms-fontColor-neutralPrimary">Welcome</h1>
+        <p class="ms-font-m ms-fontColor-neutralSecondary">This is the HelloWorld Outlook add-in!</p>
+        
+        <div class="ms-Grid-row">
+            <div class="ms-Grid-col ms-u-sm12">
+                <button id="get-item-class" class="ms-Button ms-Button--primary">
+                    <span class="ms-Button-label">Get Item Info</span>
+                </button>
+            </div>
+        </div>
+        
+        <div id="item-info" class="ms-Grid-row">
+            <div class="ms-Grid-col ms-u-sm12">
+                <p id="item-subject"></p>
+                <p id="item-from"></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="taskpane.js"></script>
+</body>
+</html>

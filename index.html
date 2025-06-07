@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HelloWorld Add-in</title>
+    
+    <!-- Office JavaScript API -->
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+    <div id="content">
+        <h2>HelloWorld Add-in</h2>
+        <p>This is the function file for the add-in.</p>
+    </div>
+
+    <script type="text/javascript">
+        Office.onReady(function (info) {
+            // Add-in is ready
+            console.log('Office.js is ready');
+        });
+    </script>
+</body>
+</html>

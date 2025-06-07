@@ -1,0 +1,93 @@
+/* Basic styling */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", "Segoe UI Web Regular", "Segoe UI Symbol", "Helvetica Neue", "BBAlpha Sans", "S60 Sans", Arial, sans-serif;
+}
+
+.ms-welcome {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 20px;
+    min-height: 200px;
+}
+
+.ms-welcome img {
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.ms-font-xxl {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.ms-fontWeight-light {
+    font-weight: 300;
+}
+
+.ms-fontColor-neutralPrimary {
+    color: #323130;
+}
+
+.ms-font-m {
+    font-size: 14px;
+}
+
+.ms-fontColor-neutralSecondary {
+    color: #605e5c;
+}
+
+.ms-Grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+}
+
+.ms-Grid-col {
+    flex: 1;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.ms-Button {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    background-color: #0078d4;
+    color: #ffffff;
+    min-width: 80px;
+}
+
+.ms-Button:hover {
+    background-color: #106ebe;
+}
+
+.ms-Button--primary {
+    background-color: #0078d4;
+    border-color: #0078d4;
+}
+
+.ms-Button-label {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+#item-info {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f3f2f1;
+    border-radius: 4px;
+}
