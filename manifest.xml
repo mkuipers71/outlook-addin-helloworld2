@@ -11,11 +11,9 @@
   <Version>1.0.0.0</Version>
   <ProviderName>Your Name</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="HelloWorld Add-in"/>
-  <Description DefaultValue="A simple HelloWorld add-in for Outlook"/>
-  <IconUrl DefaultValue="https://mkuipers.github.io/hello-world-outlook-addin/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/icon-80.png"/>
-  <SupportUrl DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/"/>
+  <DisplayName DefaultValue="Provim Add-in"/>
+  <Description DefaultValue="Provim integration add-in for Outlook"/>
+  <SupportUrl DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/"/>
 
   <!-- Hosts -->
   <Hosts>
@@ -33,7 +31,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/index.html"/>
+        <SourceLocation DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/index.html"/>
         <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -56,30 +54,54 @@
           <!-- Function File -->
           <FunctionFile resid="Commands.Url"/>
 
-          <!-- Extension Points -->
+          <!-- Extension Points for Message Reading -->
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
-              <Group id="msgReadGroup">
-                <Label resid="GroupLabel"/>
-                <Control xsi:type="Button" id="msgReadOpenPaneButton">
-                  <Label resid="TaskpaneButton.Label"/>
+              <Group id="provimMessageGroup">
+                <Label resid="Provim.GroupLabel"/>
+                <Control xsi:type="Button" id="exportToProvimButton">
+                  <Label resid="Provim.ExportButton.Label"/>
                   <Supertip>
-                    <Title resid="TaskpaneButton.Label"/>
-                    <Description resid="TaskpaneButton.Tooltip"/>
+                    <Title resid="Provim.ExportButton.Label"/>
+                    <Description resid="Provim.ExportButton.Tooltip"/>
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16"/>
                     <bt:Image size="32" resid="Icon.32x32"/>
                     <bt:Image size="80" resid="Icon.80x80"/>
                   </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>exportToProvim</FunctionName>
                   </Action>
                 </Control>
               </Group>
             </OfficeTab>
           </ExtensionPoint>
+
+          <!-- Extension Points for Message Composing -->
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="provimComposeGroup">
+                <Label resid="Provim.GroupLabel"/>
+                <Control xsi:type="Button" id="exportToProvimComposeButton">
+                  <Label resid="Provim.ExportButton.Label"/>
+                  <Supertip>
+                    <Title resid="Provim.ExportButton.Label"/>
+                    <Description resid="Provim.ExportButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>exportToProvim</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
         </DesktopFormFactor>
       </Host>
     </Hosts>
@@ -87,20 +109,20 @@
     <!-- Resources -->
     <Resources>
       <bt:Images>
-        <bt:Image id="Icon.16x16" DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/icon-16.png"/>
-        <bt:Image id="Icon.32x32" DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/icon-32.png"/>
-        <bt:Image id="Icon.80x80" DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/icon-80.png"/>
+        <bt:Image id="Icon.16x16" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAFYSURBVDiNpZM9SwNBEIafgwQSCxsLwcJCG1sLG1sLbSy0sdDGQhsLbSy0sVBYG9va2lhoa2NjY2Nra2tljYW1lTYWWltrY2Njo42NjY2NjY2NjTYWWltra2ttbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1t"/>
+        <bt:Image id="Icon.32x32" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAJYSURBVFiFtZc9SwNBEIafgwQSCxsLwcJCG1sLG1sLbSy0sdDGQhsLbSy0sVBYG9va2lhoa2NjY2Nra2tljYW1lTYWWltrY2Njo42NjY2NjY2NjTYWWltra2ttbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1t"/>
+        <bt:Image id="Icon.80x80" DefaultValue="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANYSURBVHic7Zs9aBRBFMefgwQSCxsLwcJCG1sLG1sLbSy0sdDGQhsLbSy0sVBYG9va2lhoa2NjY2Nra2tljYW1lTYWWltrY2Njo42NjY2NjY2NjTYWWltra2ttbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1t"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="Commands.Url" DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/index.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://mkuipers71.github.io/hello-world-outlook-addin/taskpane.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/index.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GroupLabel" DefaultValue="HelloWorld Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Show HelloWorld"/>
+        <bt:String id="Provim.GroupLabel" DefaultValue="Provim"/>
+        <bt:String id="Provim.ExportButton.Label" DefaultValue="Export to Provim"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens the HelloWorld task pane"/>
+        <bt:String id="Provim.ExportButton.Tooltip" DefaultValue="Export the current email to Provim system"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

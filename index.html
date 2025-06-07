@@ -4,22 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HelloWorld Add-in</title>
+    <title>Provim Add-in</title>
     
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
 </head>
 <body>
     <div id="content">
-        <h2>HelloWorld Add-in</h2>
-        <p>This is the function file for the add-in.</p>
+        <h2>Provim Add-in</h2>
+        <p>This is the function file for the Provim add-in.</p>
     </div>
 
     <script type="text/javascript">
         Office.onReady(function (info) {
             // Add-in is ready
-            console.log('Office.js is ready');
+            console.log('Provim Add-in is ready');
         });
+
+        // Function called when "Export to Provim" button is clicked
+        function exportToProvim(event) {
+            // Get the current item (email)
+            var item = Office.context.mailbox.item;
+            
+            // Show the "not implemented" message
+            Office.context.ui.displayDialogAsync(
+                'data:text/html,<html><head><title>Provim Export</title><style>body{font-family:Segoe UI,sans-serif;padding:20px;text-align:center;}h2{color:#0078d4;}</style></head><body><h2>Export to Provim</h2><p>This functionality is not implemented yet.</p><p><strong>Email Subject:</strong><br>' + (item.subject || 'No subject') + '</p><button onclick="window.close();">Close</button></body></html>',
+                { height: 30, width: 50 },
+                function (result) {
+                    if (result.status === Office.AsyncResultStatus.Failed) {
+                        // Fallback to simple alert if dialog fails
+                        alert('Export to Provim\n\nThis functionality is not implemented yet.\n\nEmail: ' + (item.subject || 'No subject'));
+                    }
+                }
+            );
+
+            // Let the platform know we're done processing the action
+            event.completed();
+        }
+
+        // Make function available globally
+        window.exportToProvim = exportToProvim;
     </script>
 </body>
 </html>
