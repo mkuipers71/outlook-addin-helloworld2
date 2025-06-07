@@ -21,19 +21,117 @@
             console.log('Provim Add-in is ready');
         });
 
-        // Function called when "Export to Provim" button is clicked
-        function exportToProvim(event) {
+        // Function called when "Export to Provim" button is clicked from the ribbon
+        function showExportDialog(event) {
             // Get the current item (email)
             var item = Office.context.mailbox.item;
             
-            // Show the "not implemented" message
+            // Create a simple dialog content
+            var dialogContent = `
+                <html>
+                <head>
+                    <title>Export to Provim</title>
+                    <style>
+                        body { 
+                            font-family: 'Segoe UI', sans-serif; 
+                            padding: 30px; 
+                            text-align: center; 
+                            background: #f8f9fa; 
+                        }
+                        .container {
+                            background: white;
+                            padding: 30px;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                            max-width: 500px;
+                            margin: 0 auto;
+                        }
+                        h2 { 
+                            color: #0078d4; 
+                            margin-bottom: 20px;
+                            font-size: 24px;
+                        }
+                        .email-info { 
+                            background: #f3f2f1; 
+                            padding: 20px; 
+                            border-radius: 6px; 
+                            margin: 20px 0; 
+                            text-align: left;
+                            border-left: 4px solid #0078d4;
+                        }
+                        .feature-list {
+                            text-align: left;
+                            margin: 20px 0;
+                        }
+                        .feature-list li {
+                            margin: 8px 0;
+                            color: #605e5c;
+                        }
+                        .close-btn { 
+                            background: #0078d4; 
+                            color: white; 
+                            border: none; 
+                            padding: 12px 24px; 
+                            border-radius: 4px; 
+                            cursor: pointer; 
+                            font-size: 14px;
+                            margin-top: 20px;
+                        }
+                        .close-btn:hover {
+                            background: #106ebe;
+                        }
+                        .status {
+                            background: #fff3cd;
+                            color: #856404;
+                            padding: 12px;
+                            border-radius: 4px;
+                            margin: 15px 0;
+                            border: 1px solid #ffeaa7;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <h2>🔄 Export to Provim</h2>
+                        
+                        <div class="status">
+                            <strong>⚠️ This functionality is not implemented yet</strong>
+                        </div>
+                        
+                        <div class="email-info">
+                            <strong>📧 Email Details:</strong><br>
+                            <strong>Subject:</strong> ${item.subject || 'No subject'}<br>
+                            <strong>Type:</strong> ${item.itemType}<br>
+                            <strong>Date:</strong> ${item.dateTimeCreated ? new Date(item.dateTimeCreated).toLocaleString() : 'N/A'}
+                        </div>
+                        
+                        <p><strong>When implemented, this feature will:</strong></p>
+                        <ul class="feature-list">
+                            <li>📤 Export email content to Provim system</li>
+                            <li>🔗 Link emails to Provim projects</li>
+                            <li>📊 Track email communications</li>
+                            <li>📝 Create Provim records automatically</li>
+                        </ul>
+                        
+                        <button class="close-btn" onclick="window.close();">Close</button>
+                    </div>
+                </body>
+                </html>
+            `;
+
+            // Show the dialog
             Office.context.ui.displayDialogAsync(
-                'data:text/html,<html><head><title>Provim Export</title><style>body{font-family:Segoe UI,sans-serif;padding:20px;text-align:center;}h2{color:#0078d4;}</style></head><body><h2>Export to Provim</h2><p>This functionality is not implemented yet.</p><p><strong>Email Subject:</strong><br>' + (item.subject || 'No subject') + '</p><button onclick="window.close();">Close</button></body></html>',
-                { height: 30, width: 50 },
+                'data:text/html,' + encodeURIComponent(dialogContent),
+                { height: 70, width: 60 },
                 function (result) {
                     if (result.status === Office.AsyncResultStatus.Failed) {
-                        // Fallback to simple alert if dialog fails
-                        alert('Export to Provim\n\nThis functionality is not implemented yet.\n\nEmail: ' + (item.subject || 'No subject'));
+                        // Fallback to simple notification
+                        Office.context.mailbox.item.notificationMessages.replaceAsync("provim-export", {
+                            type: "informationalMessage",
+                            message: "Export to Provim: This functionality is not implemented yet.",
+                            icon: "icon1",
+                            persistent: false
+                        });
                     }
                 }
             );
@@ -43,7 +141,7 @@
         }
 
         // Make function available globally
-        window.exportToProvim = exportToProvim;
+        window.showExportDialog = showExportDialog;
     </script>
 </body>
 </html>

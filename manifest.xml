@@ -31,8 +31,8 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/index.html"/>
-        <RequestedHeight>250</RequestedHeight>
+        <SourceLocation DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/taskpane.html"/>
+        <RequestedHeight>350</RequestedHeight>
       </DesktopSettings>
     </Form>
   </FormSettings>
@@ -40,7 +40,7 @@
   <!-- Permissions -->
   <Permissions>ReadItem</Permissions>
 
-  <!-- Version Overrides -->
+  <!-- Version Overrides for Ribbon Integration -->
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
     <Requirements>
       <bt:Sets DefaultMinVersion="1.3">
@@ -57,9 +57,9 @@
           <!-- Extension Points for Message Reading -->
           <ExtensionPoint xsi:type="MessageReadCommandSurface">
             <OfficeTab id="TabDefault">
-              <Group id="provimMessageGroup">
+              <Group id="provimGroup">
                 <Label resid="Provim.GroupLabel"/>
-                <Control xsi:type="Button" id="exportToProvimButton">
+                <Control xsi:type="Button" id="exportButton">
                   <Label resid="Provim.ExportButton.Label"/>
                   <Supertip>
                     <Title resid="Provim.ExportButton.Label"/>
@@ -71,31 +71,7 @@
                     <bt:Image size="80" resid="Icon.80x80"/>
                   </Icon>
                   <Action xsi:type="ExecuteFunction">
-                    <FunctionName>exportToProvim</FunctionName>
-                  </Action>
-                </Control>
-              </Group>
-            </OfficeTab>
-          </ExtensionPoint>
-
-          <!-- Extension Points for Message Composing -->
-          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
-            <OfficeTab id="TabDefault">
-              <Group id="provimComposeGroup">
-                <Label resid="Provim.GroupLabel"/>
-                <Control xsi:type="Button" id="exportToProvimComposeButton">
-                  <Label resid="Provim.ExportButton.Label"/>
-                  <Supertip>
-                    <Title resid="Provim.ExportButton.Label"/>
-                    <Description resid="Provim.ExportButton.Tooltip"/>
-                  </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon.16x16"/>
-                    <bt:Image size="32" resid="Icon.32x32"/>
-                    <bt:Image size="80" resid="Icon.80x80"/>
-                  </Icon>
-                  <Action xsi:type="ExecuteFunction">
-                    <FunctionName>exportToProvim</FunctionName>
+                    <FunctionName>showExportDialog</FunctionName>
                   </Action>
                 </Control>
               </Group>
@@ -115,7 +91,6 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/index.html"/>
-        <bt:Url id="Taskpane.Url" DefaultValue="https://mkuipers71.github.io/outlook-addin-helloworld2/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="Provim.GroupLabel" DefaultValue="Provim"/>
